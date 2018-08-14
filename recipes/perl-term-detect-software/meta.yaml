@@ -1,0 +1,38 @@
+package:
+  name: perl-term-detect-software
+  version: "0.21"
+
+build:
+  number: 1
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PERLANCAR/Term-Detect-Software-0.21.tar.gz
+  md5: acfe8c62d87ee4ce04f3c8ccc0b1a9a0
+
+build:
+  number: 1
+
+requirements:
+  host:
+    - perl
+    - perl-file-which
+    - perl-perl-osnames
+    - perl-extutils-makemaker
+    - perl-pathtools
+    - perl-test-simple
+    #- perl-experimental
+    #- perl-io
+
+  run:
+    - perl
+    - perl-file-which
+    #- perl-experimental
+
+test:
+  imports:
+    - Term::Detect::Software
+
+about:
+  home: https://metacpan.org/release/Term-Detect-Software
+  license: perl_5
+  summary: 'Detect terminal (emulator) software and its capabilities'

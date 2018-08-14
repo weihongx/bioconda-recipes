@@ -1,34 +1,49 @@
+{% set name = "snippy" %}
+{% set version = "4.0.0" %}
+{% set hash = "ccc3839276e8ae9d1807e975803c3593504521f2cd011dfdbcc249b8abf17700" %}
+
 package:
-  name: snippy
-  version: '3.1'
+  name: {{ name }}
+  version: "{{ version }}"
 
 source:
-  fn: snippy_v3.1.tar.gz
-  md5: 775aeadd899d731a8aed4f6e027a9ea4
-  url: https://github.com/tseemann/snippy/archive/v3.1.tar.gz
+  sha256: {{ hash }}
+  url: https://github.com/tseemann/{{ name }}/archive/v{{ version }}.tar.gz
 
 build:
-  number: 0
+  number: 1
+  skip: True # [osx]
 
 requirements:
   run:
-    - perl-threaded
+    - perl
     - perl-bioperl
     - perl-list-moreutils
-    - bwa
-    - samtools
-    - parallel
-    - freebayes
+    - perl-time-piece
+    - bwa >=0.7.17
+    - samtools >=1.8
+    - bcftools >=1.8
+    - parallel >=20170422
+    - freebayes >=1.1
     - vcflib
-    - vcftools
-    - snpeff
-    - htslib
+    - snpeff >=4.3
+    - vt >=0.5772
+    - snp-sites >=2.4
+    - emboss >=6.0
+    - samclip >=0.2
+    - seqtk >=1.2
+    - minimap2 >=2.10
 
 test:
   commands:
-  - snippy --version
+    - snippy --version
+    - snippy --check
 
 about:
   home: https://github.com/tseemann/snippy
   license: GPL2
   summary: Rapid bacterial SNP calling and core genome alignments
+
+extra:
+  identifiers:
+    - biotools:snippy

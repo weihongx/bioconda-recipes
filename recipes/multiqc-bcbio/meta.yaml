@@ -1,26 +1,27 @@
+{% set tag="5fbec8c" %}
+
 package:
   name: multiqc-bcbio
-  version: "0.1.9"
+  version: "0.2.6"
 
 source:
-  git_url: https://github.com/lpantano/MultiQC_bcbio
-  git_tag: 778bd4f8281e41ebe1f68140c64774197b6f91f4
+  url: https://github.com/MultiQC/MultiQC_bcbio/archive/{{ tag }}.tar.gz
+  md5: 8a8d90d8e3350a621db3ee79ca209d8c
 
 build:
-  number: 0
+  noarch: python
+  number: 2
   preserve_egg_dir: True
-  skip: False
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
-    - multiqc
+    - multiqc >=1.2
 
   run:
     - python
-    - setuptools
-    - multiqc
+    - multiqc >=1.2
 
 test:
   # Python imports
@@ -31,4 +32,3 @@ about:
   home: http://multiqc.info
   license: GNU General Public License v3 (GPLv3)
   summary: 'MultiQC plugin for bcbio report visualization.'
-

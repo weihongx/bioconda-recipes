@@ -1,0 +1,60 @@
+{% set name = "pbcommand" %}
+{% set version = "1.1.1" %}
+{% set sha256 = "d116e7ca37926f46b077c598c97d60894617b1a0474ee528ee85ce6f184247a7" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/PacificBiosciences/{{ name }}/releases/download/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+about:
+  home: https://github.com/PacificBiosciences/pbcommand
+  license: BSD
+  summary: Library and Tools for interfacing with PacBio pbsmrtpipe workflow engine
+
+extra:
+  recipe-maintainers:
+    - pb-dseifert
+    - mhsieh
+
+build:
+  skip: True # [not py27]
+  number: 0
+  entry_points:
+    - pbservice = pbcommand.services.cli:main
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - avro
+    - requests
+    - iso8601
+    - pytz
+    - numpy
+  run:
+    - python
+    - avro
+    - requests
+    - iso8601
+    - pytz
+    - numpy
+
+test:
+  # Python imports
+  imports:
+    - pbcommand
+    - pbcommand.cli
+    - pbcommand.cli.examples
+    - pbcommand.engine
+    - pbcommand.models
+    - pbcommand.pb_io
+    - pbcommand.schemas
+    - pbcommand.services
+    - pbcommand.testkit
+    - tests
+  commands:
+    - pbservice --help

@@ -3,20 +3,18 @@ package:
   version: "1.302052"
 
 source:
-    fn: Test-Simple-1.302052.tar.gz
-    url: https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Test-Simple-1.302052.tar.gz
-    md5: '2e39455e5b26c26abc1f0f2cef6e4fcc'
+  url: https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Test-Simple-1.302052.tar.gz
+  md5: '2e39455e5b26c26abc1f0f2cef6e4fcc'
 
 build:
   number: 1
 
 requirements:
-  build:
-    - perl-threaded
-    - perl-app-cpanminus
+  host:
+    - perl
 
   run:
-    - perl-threaded
+    - perl
 
 test:
   # Perl 'use' tests
@@ -27,8 +25,8 @@ test:
   # that will be run at test time.
 
   # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
+  # Put any additional test requirements here.  For example
+  # - nose
 
 about:
   home: http://metacpan.org/pod/Test-Simple

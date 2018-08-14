@@ -1,16 +1,18 @@
 package:
   name: umis
-  version: '0.2.2a0'
+  version: '1.0.0'
 
 build:
-  number: 0
+  number: 1
 
 source:
-  fn: 0ce7cb9.tar.gz
-  url: https://github.com/vals/umis/archive/0ce7cb9.tar.gz
+  url: https://github.com/vals/umis/archive/b02a113.tar.gz
+  sha256: 44593b48c1c30784739b5adea92f8b6891c67bdc4bf314ee12b5eed434d706e1
 
 requirements:
   build:
+    - {{ compiler('c') }}
+  host:
     - python
     - setuptools
     - pandas
@@ -19,6 +21,7 @@ requirements:
     - regex
     - cython
     - toolz
+    - scipy
   run:
     - python
     - pandas
@@ -27,11 +30,18 @@ requirements:
     - regex
     - cython
     - toolz
+    - scipy
 test:
   commands:
-    - umis --help
+    - umis version
 
 about:
   home: https://github.com/vals/umis
   license: MIT
   summary: Tools for processing UMI RNA-tag data
+
+extra:
+  container:
+    # click requires a unicode locale when used with Python 3
+    # extended-base generates en_US.UTF-8 locale and sets LC_ALL, LANG properly
+    extended-base: true  # [py3k]

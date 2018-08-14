@@ -1,0 +1,36 @@
+{% set version = "2.0.0" %}
+
+package:
+  name: motus
+  version: {{ version }}
+
+source:
+  url: https://github.com/motu-tool/mOTUs_v2/archive/{{ version }}.tar.gz
+  sha256: ab2f3dffc529cec23b02f254021fee11f99988f922217ab813664bcebd12fc65
+
+build:
+  number: 0
+  skip: True # [osx]
+
+requirements:
+  host:
+    - python
+  run:
+    - metasnv
+    - samtools
+    - bwa
+    - python
+
+test:
+  commands:
+    - motus --version
+
+about:
+  home: http://motu-tool.org/
+  license: GNU GPL v3
+  summary: 'Marker gene-based OTU (mOTU) profiling'
+
+extra:
+  notes: 'A tiny wrapper to the command motus was added. See build.sh for additional notes'
+  identifiers:
+    - biotools:motus

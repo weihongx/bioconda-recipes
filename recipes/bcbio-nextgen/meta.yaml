@@ -1,69 +1,67 @@
 package:
   name: bcbio-nextgen
-  version: '1.0.0a0'
+  version: '1.1.1a'
 
 build:
-  number: 8
-  skip: True # [not py27]
+  number: 3
+  skip: true # [not py27]
 
 source:
-  
-  #fn: bcbio-nextgen-0.9.9.tar.gz
-  #url: https://pypi.python.org/packages/4f/90/36f1908ef62b954102604cdfe9d4d7d490131050ae0cd294e27bac5989cc/bcbio-nextgen-0.9.9.tar.gz
-  #md5: b7ff9a89c247016282762f2f1ae9a036
-  fn: bcbio-nextgen-d4031da.tar.gz
-  url: https://github.com/chapmanb/bcbio-nextgen/archive/d4031da.tar.gz
+  #url: https://pypi.io/packages/source/b/bcbio-nextgen/bcbio-nextgen-1.1.0.tar.gz
+  url: https://github.com/bcbio/bcbio-nextgen/archive/ee6d67c.tar.gz
+  sha256: 00bdd5cc88eb6a74cd4673139227da5b945e333fc0b036f6c51eb3c947c32167
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
+    - pip
   run:
     - python
-    - argparse [py26]
+    - argparse # [py26]
     - arrow
     - azure
+    - beautifulsoup4
     - bioblend
     - biopython
     - boto
-    - click
     - cython
     - cyvcf2
+    - dnapi
     - fabric
     - fadapa
+    - geneimpacts
     - gffutils
-    - ipyparallel
-    - ipython-cluster-helper
-    - ipywidgets
+    - h5py
+    - htslib
+    - ipyparallel >=6.0.2
+    - ipython-cluster-helper >=0.6.1
     - joblib
-    - libsodium >=0.4,<1.0
     - logbook
-    - lxml
     - matplotlib
+    - mock
     - msgpack-python
-    - nose
-    - numpy
-    - openpyxl
     - openssl
     - pandas
     - path.py
     - patsy
     - pip
+    - py
     - pycrypto
+    - pytest
+    - pytest-cov >=2.5.1
+    - pytest-mock
     - progressbar
     - psutil
-    - python-dateutil
+    - python-dateutil >=2.5.0
     - pybedtools
-    - pysam
+    - pysam >=0.13.0
     - pyvcf
     - pyyaml
-    - pyzmq
-    - reportlab
     - requests
     - scipy
     - seaborn
     - seqcluster
-    - sh
     - sqlalchemy
     - statsmodels
     - tabulate
@@ -80,13 +78,19 @@ test:
     # ImportError: dlopen(zmq/backend/cython/constants.so, 2): Library not loaded: @rpath/./libzmq.4.dylib
     #   Referenced from: /zmq/backend/cython/constants.so
     #     Reason: image not found
-    #- bcbio.distributed.ipython
+    - bcbio.distributed.ipython # [not osx]
   commands:
-    - bcbio_nextgen.py -h
-    - bcbio_setup_genome.py -h
-    - bcbio_prepare_samples.py -h
+    # click requires a unicode locale
+    - LANG=C.UTF-8 bcbio_nextgen.py -h
+    - LANG=C.UTF-8 bcbio_setup_genome.py -h
+    - LANG=C.UTF-8 bcbio_prepare_samples.py -h
 
 about:
   home: https://github.com/chapmanb/bcbio-nextgen
   license: MIT
   summary: Validated, scalable, community developed variant calling, RNA-seq and small RNA analysis
+
+extra:
+  identifiers:
+    - biotools:bcbio-nextgen
+    - doi:10.1093/bioinformatics/btv061

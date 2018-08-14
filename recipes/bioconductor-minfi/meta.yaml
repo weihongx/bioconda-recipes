@@ -1,18 +1,23 @@
+{% set version = "1.24.0" %}
+{% set name = "minfi" %}
+{% set bioc = "3.6" %}
+
 package:
-  name: bioconductor-minfi
-  version: 1.16.1
+  name: 'bioconductor-{{ name|lower }}'
+  version: '{{ version }}'
 source:
-  fn: minfi_1.16.1.tar.gz
-  url: http://bioconductor.org/packages/release/bioc/src/contrib/minfi_1.16.1.tar.gz
-  md5: 30335d8ee3fcea0ece6a40cddfdb8558
+  url:
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/{{ name }}/{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: 27b66608e7aceed1b701b5f85fb35d0356b9c964164b1545cf2afef4b7d265de
 build:
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
 requirements:
-  build:
-    - 'bioconductor-biobase >=2.17.8'
+  host:
+    - 'bioconductor-biobase >=2.33.2'
     - 'bioconductor-biocgenerics >=0.15.3'
     - bioconductor-biostrings
     - 'bioconductor-bumphunter >=1.1.9'
@@ -26,18 +31,21 @@ requirements:
     - bioconductor-preprocesscore
     - bioconductor-s4vectors
     - bioconductor-siggenes
-    - 'bioconductor-summarizedexperiment >=0.3.1'
-    - r
+    - 'bioconductor-summarizedexperiment >=1.1.6'
+    - r-base
     - r-beanplot
-    - r-matrixstats
+    - r-data.table
+    - r-lattice
+    - r-mass
+    - 'r-matrixstats >=0.50.0'
     - r-mclust
-    - r-mixomics
+    - r-nlme
     - r-nor1mix
     - r-quadprog
     - r-rcolorbrewer
     - r-reshape
   run:
-    - 'bioconductor-biobase >=2.17.8'
+    - 'bioconductor-biobase >=2.33.2'
     - 'bioconductor-biocgenerics >=0.15.3'
     - bioconductor-biostrings
     - 'bioconductor-bumphunter >=1.1.9'
@@ -51,20 +59,27 @@ requirements:
     - bioconductor-preprocesscore
     - bioconductor-s4vectors
     - bioconductor-siggenes
-    - 'bioconductor-summarizedexperiment >=0.3.1'
-    - r
+    - 'bioconductor-summarizedexperiment >=1.1.6'
+    - r-base
     - r-beanplot
-    - r-matrixstats
+    - r-data.table
+    - r-lattice
+    - r-mass
+    - 'r-matrixstats >=0.50.0'
     - r-mclust
-    - r-mixomics
+    - r-nlme
     - r-nor1mix
     - r-quadprog
     - r-rcolorbrewer
     - r-reshape
 test:
   commands:
-    - '$R -e "library(''minfi'')"'
+    - '$R -e "library(''{{ name }}'')"'
 about:
-  home: http://bioconductor.org/packages/release/bioc/html/minfi.html
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
   license: Artistic-2.0
-  summary: 'Tools for analyzing and visualizing Illuminas 450k array data.'
+  summary: 'Tools to analyze & visualize Illumina Infinium methylation arrays.'
+
+extra:
+  identifiers:
+    - biotools:minfi

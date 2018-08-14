@@ -1,33 +1,51 @@
+{% set name = "busco" %}
+{% set version = "3.0.2" %}
+{% set sha256 = "7cfc50b1a256cd697ec7e2b1c3b5af7118f50e2d809533df3d5d8dfca7560c46" %}
+
 package:
-  name: busco
-  version: "1.2"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 build:
-  number: 1
+  # The R dependencies on OSX needs to be rebuilt with conda-build 3
+  skip: True # [py27 or osx]
+  number: 7
 
 source:
-  fn: busco-v1.2.tar.gz
-  url: http://busco.ezlab.org/files/BUSCO_v1.2.tar.gz
-  md5: 4b4551ccdbc8e64d18295fc8d8729d84
+  url: https://gitlab.com/ezlab/busco/-/archive/{{ version }}/busco-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
 requirements:
-  build:
-    - python  
+  host:
+    - python
   run:
     - python
     - blast
     - hmmer
-      #    - emboss
+    - augustus >=3.2.3
+    - r-ggplot2 >=2.2.1
+
+test:
+  requires:
+    - wget
+  commands:
+    - run_BUSCO.py -h
+    - run_busco -h
+    - generate_plot.py -h
+    - generate_plot -h
+
+    # Message reported by busco when the config file exists but no input provided
+    - run_busco | grep "Please add it in the config file"
 
 about:
   home: http://busco.ezlab.org/
   license: GPL
-  summary: BUSCO provides measures for quantitative assessment of genome 
-           assembly, gene set, and transcriptome completeness based on 
-           evolutionarily informed expectations of gene content from 
-           near-universal single-copy orthologs selected from OrthoDB. 
+  summary: BUSCO provides measures for quantitative assessment of genome
+           assembly, gene set, and transcriptome completeness based on
+           evolutionarily informed expectations of gene content from
+           near-universal single-copy orthologs selected from OrthoDB.
 
-test:
-  commands:
-    - BUSCO_v1.2.py -h > /dev/null
-    - busco -h > /dev/null
+extra:
+  identifiers:
+    - biotools:busco
+    - doi:10.1093/bioinformatics/btv351

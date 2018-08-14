@@ -50,9 +50,14 @@ BEGIN {
 ##    Windows w/Cygwin example:
 ##     $REPEATMASKER_DIR = "/cygdrive/c/RepeatMasker";
 ##
+  foreach $var (qw(REPEATMASKER_DIR REPEATMASKER_MATRICES_DIR REPEATMASKER_LIB_DIR)) {
+      die "environment variable $var not defined" if !defined($ENV{$var});
+      die "directory (" . $ENV{$var} . ") does not exist for $var" unless (-d $ENV{$var});
+  }
+
   $REPEATMASKER_DIR          = $ENV{'REPEATMASKER_DIR'};
-  $REPEATMASKER_MATRICES_DIR = "$REPEATMASKER_DIR/Matrices";
-  $REPEATMASKER_LIB_DIR      = "$REPEATMASKER_DIR/Libraries";
+  $REPEATMASKER_MATRICES_DIR = $ENV{'REPEATMASKER_MATRICES_DIR'};
+  $REPEATMASKER_LIB_DIR      = $ENV{'REPEATMASKER_LIB_DIR'};
 
 ##
 ## Search Engine Configuration:
@@ -149,9 +154,12 @@ BEGIN {
 ##     run against short sequences using the same
 ##     species parameters.
 ##
+  
   @LIBPATH = ( $REPEATMASKER_LIB_DIR, 
                $ENV{'HOME'} . "/.RepeatMaskerCache" );
-
+  if (defined($ENV{'REPEATMASKER_CACHE_DIR'})) {
+    unshift(@LIBPATH, $ENV{'REPEATMASKER_CACHE_DIR'});
+  }
 
 ##
 ## TRF Location ( OPTIONAL )
