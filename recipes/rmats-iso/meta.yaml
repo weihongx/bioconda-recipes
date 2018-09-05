@@ -9,7 +9,7 @@ source:
 
 build:
   number: 0
-  skip: True    # [py3k]
+  skip: True    # [py27]
 
 requirements:
   host:
@@ -23,7 +23,7 @@ requirements:
     - samtools >=1.6
     - snakemake
     - ucsc-gtftogenepred
-    - ucsc-genePredToBed
+    - ucsc-genepredtobed
 
 test:
   commands:
