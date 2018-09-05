@@ -1,0 +1,35 @@
+package:
+  name: rmats-iso
+  version: '0.1.0'
+
+source:
+  sha256: d9aefe6c273afb61eb06925e1c3f631279aade765e828ed9596d5927f1ada302
+  url: https://sourceforge.net/projects/rmats-iso/files/rMATS-ISO/rMATS-ISO.0.1.0.zip
+  
+
+build:
+  number: 0
+  skip: True    # [py3k]
+
+requirements:
+  host:
+    - python >=3
+
+  run:
+    - python >=3
+    - htslib
+    - minimap2 >=2.5
+    - star >=2.5.3a
+    - samtools >=1.6
+    - snakemake
+    - ucsc-gtftogenepred
+    - ucsc-genePredToBed
+
+test:
+  commands:
+    - rMATS-ISO.py
+
+about:
+  home: https://rmats-iso.sourceforge.io
+  license: MIT
+  summary: rMATS-Iso is a generalization of the rMATS statistical framework, to detect differential splicing modules with complex splicing patterns using replicate RNA-seq data.
