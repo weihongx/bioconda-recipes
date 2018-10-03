@@ -1,3 +1,4 @@
+#!/bin/bash 
 #tar -xvf metabat-static-binary-linux-x64_v2.12.1.tar.gz
 
 # copying over all necessary files
