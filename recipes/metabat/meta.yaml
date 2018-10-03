@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - 'metabat2 -h | grep "MetaBAT: Metagenome Binning based" > /dev/null'
+    - metabat2 -h
 
 about:
   home: https://bitbucket.org/berkeleylab/metabat
