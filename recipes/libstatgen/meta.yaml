@@ -12,6 +12,8 @@ build:
 source:
   url: https://github.com/statgen/libStatGen/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - gcc.patch
 
 requirements:
   build:

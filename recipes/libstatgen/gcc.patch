@@ -1,0 +1,10 @@
+--- bam/SamInterface.cpp	2012-10-24 15:53:29.000000000 -0500
++++ bam/SamInterface.cpp.new	2018-11-26 19:55:46.793248466 -0600
+@@ -20,6 +20,7 @@
+ 
+ #include <limits>
+ #include <stdint.h>
++#include <cstdint>
+ 
+ SamInterface::SamInterface()
+ {
