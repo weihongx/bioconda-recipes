@@ -1,13 +1,13 @@
 --- bam/SamInterface.cpp	2012-10-24 15:53:29.000000000 -0500
-+++ bam/SamInterface.cpp.new	2018-11-26 20:02:37.674196951 -0600
++++ bam/SamInterface.cpp.new	2018-11-26 20:22:12.172116843 -0600
 @@ -18,8 +18,9 @@
  #include "SamInterface.h"
  #include "SamRecordHelper.h"
  
--#include <limits>
-+#define __STDC_LIMIT_MACROS
- #include <stdint.h>
-+#include <limits>
++#include <iostream>
+ #include <limits>
+-#include <stdint.h>
++#include <cstdint>
  
  SamInterface::SamInterface()
  {
