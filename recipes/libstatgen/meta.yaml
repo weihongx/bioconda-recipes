@@ -17,9 +17,7 @@ source:
 
 requirements:
   build:
-    - gcc
-  run:
-    - libgcc
+    - {{ compiler('cxx') }}
 
 test:
   commands:
