@@ -12,14 +12,12 @@ build:
 source:
   url: https://github.com/statgen/libStatGen/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - gcc7.patch
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-  host:
-    - zlib
-  run:
-    - zlib
 
 test:
   commands:
@@ -28,6 +26,6 @@ test:
 about:
   home: https://genome.sph.umich.edu/wiki/C++_Library:_libStatGen
   license: GPL3
-  license_file: general/LICENSE.txt
+  license_file: copyrights/LICENSE.txt
   summary: Useful set of classes for creating statistical genetic programs.
   dev_url: https://github.com/statgen/libStatGen
