@@ -1,8 +1,18 @@
-#!/bin/sh
+#!/bin/bash
+set -eox pipefail
 
-set -x -e -o pipefail
+(git clone http://github.com/samtools/samtools && cd samtools && git checkout 28391e5898804ce6b805016d8c676fdf61442eb3)
 
-(git clone http://github.com/samtools/samtools && cd samtools && git checkout 28391e5898804ce6b805016)
+# These two environmental variables needed for a successful samtools build.
+# https://bioconda.github.io/troubleshooting.html#zlib-errors
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
+
+# This edit needed for a successful DWGSIM build.
+# https://bioconda.github.io/troubleshooting.html#zlib-errors
+sed -i "/^CFLAGS=/ s;#.*$;-I${PREFIX}\/include;" Makefile
+
+cat Makefile
 
 make LIBCURSES=-lncurses
 
